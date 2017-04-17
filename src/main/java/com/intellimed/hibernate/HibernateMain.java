@@ -22,12 +22,15 @@ public static void main(String[] args){
 	user.setDescription("First user's description goes here");
 	
 	Address addr = new Address();
-	
 	addr.setStreet("Street name");
 	addr.setCity("City name");
 	
-	user.setAddress(addr);
+	Address addr2 = new Address();
+	addr2.setStreet("Second Street name");
+	addr2.setCity("Second City name");
 	
+	user.setHomeAddress(addr);
+	user.setOfficeAddress(addr2);
 	
 	Session session = sessionFactory.openSession();
 	session.beginTransaction();
