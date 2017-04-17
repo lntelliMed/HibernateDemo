@@ -1,5 +1,7 @@
 package com.intellimed.hibernate;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -13,6 +15,9 @@ public static void main(String[] args){
 	
 	user.setUserID(1);
 	user.setUserName("First User");
+	user.setAddress("First user's address");
+	user.setJoinedDate(new Date());
+	user.setDescription("First user's description goes here");
 	
 	Session session = sessionFactory.openSession();
 	session.beginTransaction();
@@ -21,6 +26,20 @@ public static void main(String[] args){
 	session.getTransaction().commit();
 	
 	session.close();
+	
+	user = null;
+	
+	session = sessionFactory.openSession();
+	user = (UserDetails) session.get(UserDetails.class, 1);
+	
+	System.out.println("The retrieved user is " + user.getUserName());
+	
+	
+	
+	
+	
+	
+	
 	sessionFactory.close();
 	
 	
