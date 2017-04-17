@@ -3,7 +3,10 @@ package com.intellimed.hibernate.dto;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -15,7 +18,7 @@ import javax.persistence.Transient;
 @Table (name="USER_DETAILS")
 public class UserDetails {
 	
-@Id
+@Id @GeneratedValue (strategy=GenerationType.AUTO)
 //@Column (name="USER_ID")
 private int userID;
 
@@ -23,7 +26,10 @@ private int userID;
 //@Transient
 private String userName;
 
-private String Address;
+//private String Address;
+
+@Embedded
+private Address address;
 
 @Temporal(TemporalType.DATE)
 private Date joinedDate;
@@ -33,11 +39,12 @@ private String description;
 
 
 
-public String getAddress() {
-	return Address;
+
+public Address getAddress() {
+	return address;
 }
-public void setAddress(String address) {
-	Address = address;
+public void setAddress(Address address) {
+	this.address = address;
 }
 public Date getJoinedDate() {
 	return joinedDate;
