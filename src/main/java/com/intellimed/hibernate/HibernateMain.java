@@ -1,5 +1,6 @@
 package com.intellimed.hibernate;
 
+import java.applet.Applet;
 import java.util.Date;
 
 import org.hibernate.Session;
@@ -7,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.intellimed.hibernate.dto.Address;
+import com.intellimed.hibernate.dto.Appliance;
 import com.intellimed.hibernate.dto.Property;
 import com.intellimed.hibernate.dto.UserDetails;
 import com.intellimed.hibernate.dto.Vehicle;
@@ -41,6 +43,10 @@ public static void main(String[] args){
 	Vehicle vehicle = new Vehicle();
 	vehicle.setVehicleName("Car");
 	
+	Appliance appliance = new Appliance();
+	appliance.setApplianceName("TV");
+	appliance.getUserList().add(user);
+	
 	/*
 	user.setHomeAddress(addr);
 	user.setOfficeAddress(addr2);
@@ -54,6 +60,8 @@ public static void main(String[] args){
 	user.getProperty().add(property);
 	user.getProperty().add(property2);
 	
+	user.getApplianceList().add(appliance);
+	
 	property.setUser(user);
 	property2.setUser(user);
 	
@@ -64,6 +72,7 @@ public static void main(String[] args){
 	session.save(vehicle);
 	session.save(property);
 	session.save(property2);
+	session.save(appliance);
 	
 	
 	session.getTransaction().commit();

@@ -19,6 +19,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -50,9 +52,14 @@ public class UserDetails {
 	@JoinColumn(name = "VEHICLE_ID")
 	private Vehicle vehicle;
 
-	@OneToMany
-	@JoinTable(name = "USER_PROPERTY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "VEHICLE_ID"))
+	//@OneToMany
+	//@JoinTable(name = "USER_PROPERTY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "VEHICLE_ID"))
+	@OneToMany(mappedBy="user")
 	private Collection<Property> property = new ArrayList<Property>();
+	
+	@ManyToMany
+	private Collection<Appliance> applianceList = new ArrayList<Appliance>();
+ 
 
 	// private String Address;
 	/*
@@ -88,6 +95,14 @@ public class UserDetails {
 	 * = officeAddress; }
 	 * 
 	 */
+
+	public Collection<Appliance> getApplianceList() {
+		return applianceList;
+	}
+
+	public void setApplianceList(Collection<Appliance> applianceList) {
+		this.applianceList = applianceList;
+	}
 
 	public Collection<Property> getProperty() {
 		return property;

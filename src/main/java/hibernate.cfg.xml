@@ -35,6 +35,7 @@
         <mapping class="com.intellimed.hibernate.dto.UserDetails"/>
         <mapping class="com.intellimed.hibernate.dto.Vehicle"/>
         <mapping class="com.intellimed.hibernate.dto.Property"/>
+        <mapping class="com.intellimed.hibernate.dto.Appliance"/>
         
     </session-factory>
 </hibernate-configuration>
