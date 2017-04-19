@@ -37,5 +37,9 @@
         <mapping class="com.intellimed.hibernate.dto.Property"/>
         <mapping class="com.intellimed.hibernate.dto.Appliance"/>
         
+        <mapping class="com.intellimed.hibernate.dto.Animal"/>
+        <mapping class="com.intellimed.hibernate.dto.Cat"/>
+        
+        
     </session-factory>
 </hibernate-configuration>

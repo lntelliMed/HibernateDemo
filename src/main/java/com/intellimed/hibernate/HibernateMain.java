@@ -3,12 +3,17 @@ package com.intellimed.hibernate;
 import java.applet.Applet;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.intellimed.hibernate.dto.Address;
+import com.intellimed.hibernate.dto.Animal;
 import com.intellimed.hibernate.dto.Appliance;
+import com.intellimed.hibernate.dto.Cat;
 import com.intellimed.hibernate.dto.Property;
 import com.intellimed.hibernate.dto.UserDetails;
 import com.intellimed.hibernate.dto.Vehicle;
@@ -68,12 +73,22 @@ public static void main(String[] args){
 	Session session = sessionFactory.openSession();
 	session.beginTransaction();
 	
+	//session.persist(user);//Will work with the "@OneToMany(cascade=CascadeType.PERSIST)" so that we don't have to save the individual objects tied to user (as with the need for using save(property)/save(property2) below.
 	session.save(user);
 	session.save(vehicle);
 	session.save(property);
 	session.save(property2);
 	session.save(appliance);
 	
+	
+	//Single table inheritance!
+	Animal animal = new Animal();
+	animal.setAnimalName("Animal");
+	session.save(animal);
+	Cat cat = new Cat();
+	cat.setAnimalName("Cat");
+	cat.setHairColor("Blonde");
+	session.save(cat);
 	
 	session.getTransaction().commit();
 	

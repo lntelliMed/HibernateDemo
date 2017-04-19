@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
@@ -54,6 +55,7 @@ public class UserDetails {
 
 	//@OneToMany
 	//@JoinTable(name = "USER_PROPERTY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "VEHICLE_ID"))
+	//@OneToMany(mappedBy="user", cascade=CascadeType.PERSIST)
 	@OneToMany(mappedBy="user")
 	private Collection<Property> property = new ArrayList<Property>();
 	

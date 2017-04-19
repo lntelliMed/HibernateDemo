@@ -7,6 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 public class Property {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
@@ -15,6 +18,7 @@ public class Property {
 	
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
+	@NotFound(action=NotFoundAction.IGNORE) //To suppress any Hibernate errors if no user is defined for a property
 	private UserDetails user;
 	
 
