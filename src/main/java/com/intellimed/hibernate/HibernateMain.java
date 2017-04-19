@@ -29,9 +29,13 @@ public static void main(String[] args){
 	addr2.setStreet("Second Street name");
 	addr2.setCity("Second City name");
 	
+	/*
 	user.setHomeAddress(addr);
 	user.setOfficeAddress(addr2);
+	*/
 	
+	user.getListOfAddresses().add(addr);
+	user.getListOfAddresses().add(addr2);
 	Session session = sessionFactory.openSession();
 	session.beginTransaction();
 	

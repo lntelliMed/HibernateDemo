@@ -1,10 +1,13 @@
 package com.intellimed.hibernate.dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -32,7 +35,7 @@ public class UserDetails {
 	private String userName;
 
 	// private String Address;
-
+/*
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "HOME_STREET_NAME")),
 			@AttributeOverride(name = "city", column = @Column(name = "HOME_CITY_NAME")),
@@ -41,18 +44,12 @@ public class UserDetails {
 			@AttributeOverride(name = "country", column = @Column(name = "HOME_COUNTRY_NAME")), }
 
 	)
-
 	private Address homeAddress;
 
 	@Embedded
 	private Address officeAddress;
-
-	@Temporal(TemporalType.DATE)
-	private Date joinedDate;
-
-	private String description;
-
-	public Address getHomeAddress() {
+	
+		public Address getHomeAddress() {
 		return homeAddress;
 	}
 
@@ -67,6 +64,24 @@ public class UserDetails {
 	public void setOfficeAddress(Address officeAddress) {
 		this.officeAddress = officeAddress;
 	}
+
+*/
+	@ElementCollection
+	private Set<Address> listOfAddresses = new HashSet();
+	
+	public Set<Address> getListOfAddresses() {
+		return listOfAddresses;
+	}
+
+	public void setListOfAddresses(Set<Address> listOfAddresses) {
+		this.listOfAddresses = listOfAddresses;
+	}
+
+	@Temporal(TemporalType.DATE)
+	private Date joinedDate;
+
+	private String description;
+
 
 	public Date getJoinedDate() {
 		return joinedDate;
