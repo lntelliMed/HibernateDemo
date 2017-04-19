@@ -33,5 +33,7 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">create</property>
         <mapping class="com.intellimed.hibernate.dto.UserDetails"/>
+        <mapping class="com.intellimed.hibernate.dto.Vehicle"/>
+        
     </session-factory>
 </hibernate-configuration>

@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.intellimed.hibernate.dto.Address;
 import com.intellimed.hibernate.dto.UserDetails;
+import com.intellimed.hibernate.dto.Vehicle;
 
 public class HibernateMain {
 public static void main(String[] args){
@@ -29,6 +30,9 @@ public static void main(String[] args){
 	addr2.setStreet("Second Street name");
 	addr2.setCity("Second City name");
 	
+	Vehicle vehicle = new Vehicle();
+	vehicle.setVehicleName("Car");
+	
 	/*
 	user.setHomeAddress(addr);
 	user.setOfficeAddress(addr2);
@@ -36,10 +40,15 @@ public static void main(String[] args){
 	
 	user.getListOfAddresses().add(addr);
 	user.getListOfAddresses().add(addr2);
+	
+	user.setVehicle(vehicle);
+	
 	Session session = sessionFactory.openSession();
 	session.beginTransaction();
 	
 	session.save(user);
+	session.save(vehicle);
+	
 	session.getTransaction().commit();
 	
 	session.close();
@@ -51,7 +60,10 @@ public static void main(String[] args){
 	
 	System.out.println("The retrieved user is " + user.getUserName());
 	
+	session.close();
 	
+	//Since there is no open session at this point, this will result in lazy initialization exception unless this collection's fetch type is eager!
+	System.out.println(user.getListOfAddresses().size());
 	
 	
 	

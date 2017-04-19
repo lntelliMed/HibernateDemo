@@ -13,11 +13,13 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,6 +43,11 @@ public class UserDetails {
 	// @Column (name="USER_NAME")
 	// @Transient
 	private String userName;
+	
+	@OneToOne
+	@JoinColumn(name="VEHICLE_ID")
+	private Vehicle vehicle;
+	
 
 	// private String Address;
 /*
@@ -76,7 +83,15 @@ public class UserDetails {
 */
 	
 	
-	@ElementCollection
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+
+	@ElementCollection(fetch=FetchType.EAGER)
 	//To add a primary key, change to Collection which supports index.
 	//private Set<Address> listOfAddresses = new HashSet<Address>();
 	@JoinTable(name="USER_ADDRESS",
