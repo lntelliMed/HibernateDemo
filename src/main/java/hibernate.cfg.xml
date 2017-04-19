@@ -34,6 +34,7 @@
         <property name="hbm2ddl.auto">create</property>
         <mapping class="com.intellimed.hibernate.dto.UserDetails"/>
         <mapping class="com.intellimed.hibernate.dto.Vehicle"/>
+        <mapping class="com.intellimed.hibernate.dto.Property"/>
         
     </session-factory>
 </hibernate-configuration>

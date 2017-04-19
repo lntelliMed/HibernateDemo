@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.intellimed.hibernate.dto.Address;
+import com.intellimed.hibernate.dto.Property;
 import com.intellimed.hibernate.dto.UserDetails;
 import com.intellimed.hibernate.dto.Vehicle;
 
@@ -30,6 +31,13 @@ public static void main(String[] args){
 	addr2.setStreet("Second Street name");
 	addr2.setCity("Second City name");
 	
+	Property property = new Property();
+	property.setPropertyName("Condo");
+	
+	Property property2 = new Property();
+	property2.setPropertyName("Apt");
+	
+	
 	Vehicle vehicle = new Vehicle();
 	vehicle.setVehicleName("Car");
 	
@@ -43,11 +51,20 @@ public static void main(String[] args){
 	
 	user.setVehicle(vehicle);
 	
+	user.getProperty().add(property);
+	user.getProperty().add(property2);
+	
+	property.setUser(user);
+	property2.setUser(user);
+	
 	Session session = sessionFactory.openSession();
 	session.beginTransaction();
 	
 	session.save(user);
 	session.save(vehicle);
+	session.save(property);
+	session.save(property2);
+	
 	
 	session.getTransaction().commit();
 	
