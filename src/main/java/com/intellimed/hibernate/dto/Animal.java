@@ -10,9 +10,16 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
+
+//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+
+@Inheritance(strategy=InheritanceType.JOINED)
+
+/*
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="ANIMAL_TYPE", discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("GENERIC_ANIMAL_TYPE")
+*/
 public class Animal {
 	@Id @GeneratedValue
 	private int animalId;

@@ -74,7 +74,11 @@ public static void main(String[] args){
 	session.beginTransaction();
 	
 	//session.persist(user);//Will work with the "@OneToMany(cascade=CascadeType.PERSIST)" so that we don't have to save the individual objects tied to user (as with the need for using save(property)/save(property2) below.
-	session.save(user);
+	
+	
+	session.save(user);	//Object is in transient state before the save. After save it becomes Persistent.
+	user.setUserName("Updated user name (Persistent)");
+
 	session.save(vehicle);
 	session.save(property);
 	session.save(property2);
@@ -88,6 +92,7 @@ public static void main(String[] args){
 	Cat cat = new Cat();
 	cat.setAnimalName("Cat");
 	cat.setHairColor("Blonde");
+	
 	session.save(cat);
 	
 	session.getTransaction().commit();
@@ -99,6 +104,10 @@ public static void main(String[] args){
 	session = sessionFactory.openSession();
 	user = (UserDetails) session.get(UserDetails.class, 1);
 	
+	//session.delete(user);
+	//user.setUserName("Updated name");
+	//session.update(user);
+	
 	System.out.println("The retrieved user is " + user.getUserName());
 	
 	session.close();
@@ -108,7 +117,10 @@ public static void main(String[] args){
 	
 	
 	
+	System.out.println("The retrieved user is " + user.getUserName());
 	
+	user.setUserName("Updated user name (Detached");//Detached state. Will not be reflected in database!
+
 	
 	sessionFactory.close();
 	
