@@ -22,6 +22,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -35,6 +37,10 @@ import org.hibernate.annotations.Type;
 
 //@Entity (name="USER_DETAILS")
 @Entity
+@org.hibernate.annotations.Entity(selectBeforeUpdate=true)//update(object) will only be triggered if the object actually changed.
+@NamedQuery(name="UserDetails.byName", query="from UserDetails where userName=:userName")//Class and member variable names used!
+@NamedNativeQuery(name="UserDetails.byId", query="select * from USER_DETAILS where userId=:userId", resultClass=UserDetails.class)//Table and column names used!
+
 @Table(name = "USER_DETAILS")
 public class UserDetails {
 
