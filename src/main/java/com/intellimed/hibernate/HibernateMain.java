@@ -153,6 +153,7 @@ public class HibernateMain {
 		// query.setInteger(0, Integer.parseInt(userId));
 
 		Query query = session.createQuery("from UserDetails where userid >= :userId");
+		query.setCacheable(true);
 		query.setInteger("userId", Integer.parseInt(userId));
 
 		List<UserDetails> users = (List<UserDetails>) query.list();
