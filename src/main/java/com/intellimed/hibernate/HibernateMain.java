@@ -7,10 +7,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.intellimed.hibernate.dto.Address;
 import com.intellimed.hibernate.dto.Animal;
@@ -171,6 +177,36 @@ public class HibernateMain {
 		UserDetails userObj = (UserDetails) query.uniqueResult();
 		System.out.println(userObj.getUserName());
 
+		
+		Criteria criteria = session.createCriteria(UserDetails.class);
+		criteria.add(Restrictions.eq("userID", 1)).add(Restrictions.like("userName", "%user%"));
+		List<UserDetails> users3 = (List<UserDetails>) criteria.list();
+
+		for (UserDetails userRecord : users3) {
+			System.out.println("Using criteria: " + userRecord.getUserID());
+		}
+		
+		criteria = session.createCriteria(UserDetails.class);
+		criteria.add(Restrictions.or(Restrictions.eq("userID", 1), Restrictions.gt("userID", 1))).setProjection(Projections.property("userName")).addOrder(Order.asc("userID"));
+		List<String> usersNames = (List<String>) criteria.list();
+
+		for (String userName : usersNames) {
+			System.out.println("User names using criteria: " + userName);
+		}
+		
+		
+		UserDetails exampleUser = new UserDetails();
+		exampleUser.setUserID(1);
+		
+		Example example = Example.create(exampleUser);
+		
+		criteria = session.createCriteria(UserDetails.class).add(example);
+
+		List<UserDetails> users4 = (List<UserDetails>) criteria.list();
+
+		for (UserDetails userRecord : users4) {
+			System.out.println("Using query by example: " + userRecord.getUserName());
+		}
 		sessionFactory.close();
 
 	}
