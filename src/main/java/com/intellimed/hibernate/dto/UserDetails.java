@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -31,12 +32,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 //@Entity (name="USER_DETAILS")
 @Entity
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 @org.hibernate.annotations.Entity(selectBeforeUpdate=true)//update(object) will only be triggered if the object actually changed.
 @NamedQuery(name="UserDetails.byName", query="from UserDetails where userName=:userName")//Class and member variable names used!
 @NamedNativeQuery(name="UserDetails.byId", query="select * from USER_DETAILS where userId=:userId", resultClass=UserDetails.class)//Table and column names used!
